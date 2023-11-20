@@ -9,13 +9,13 @@ const int MAX_USER_COUNT = 100000;
 const int MAX_PAGE_COUNT = 1000;
 
 namespace cheer_reader  {
-    void FillingVectorWithNumber(int number, vector<int>&  container){
-        for(size_t i = 0; i != container.size(); ++i){
+    void FillingVectorWithNumber(const int number, vector<int>&  container){
+        for (size_t i = 0; i < container.size(); ++i){
             container.at(i) = number;
         }
     }
 
-    void UpdatePageRange(int lhs, int rhs, vector<int>&  number_readers_who_read_to_page) {
+    void UpdatePageRange(const int lhs, const int rhs, vector<int>&  number_readers_who_read_to_page) {
         for (int i = lhs; i < rhs; ++i) {
             ++number_readers_who_read_to_page[i];
         }
