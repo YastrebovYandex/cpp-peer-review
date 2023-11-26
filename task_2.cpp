@@ -15,8 +15,8 @@ public:
         return domain_ == other.domain_;
     }
 
-    bool operator < (const Domain& domain) const {
-        return domain_ < domain.domain_;
+    bool operator < (const Domain& other) const {
+        return domain_ < other.domain_;
     }
 
     bool IsSubdomain(const Domain& other) const {
