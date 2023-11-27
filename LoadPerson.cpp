@@ -3,15 +3,15 @@ struct SetDbConnectionParams{
     int db_connection_timeout;
     bool db_allow_exceptions;
 	
-	SetDbConnectionParams& SetDbName(string db_name){
+	SetDbConnectionParams& SetDbName(const string& db_name){
 		this->db_name = db_name;
         return *this;
 	}	
-    SetDbConnectionParams& SetDbConnectionTimeout(int db_connection_timeout) const{
+    SetDbConnectionParams& SetDbConnectionTimeout(int db_connection_timeout) {
         this->db_connection_timeout = db_connection_timeout;
         return *this;
     }
-    SetDbConnectionParams& SetDbAllowExceptions(bool db_allow_exceptions) const{
+    SetDbConnectionParams& SetDbAllowExceptions(bool db_allow_exceptions) {
         this->db_allow_exceptions = db_allow_exceptions;
         return *this;
     }
@@ -21,17 +21,17 @@ struct SetPersonsParams{
     int min_age;
     int max_age;
         
-    SetPersonsParams& SetMinAge(int min_age) const{
+    SetPersonsParams& SetMinAge(int min_age) {
         this->min_age = min_age;
         return *this;
     }
-    SetPersonsParams& SetMaxAge(int max_age) const{
+    SetPersonsParams& SetMaxAge(int max_age) {
         this->max_age = max_age;
         return *this;
     }
 };
 
-optional<DBHandler> DataBaseConnection(const SetDbConnectionParams& params, const DBLogLevel db_log_level){
+optional<DBHandler> DataBaseConnection(const SetDbConnectionParams& params, const DBLogLevel& db_log_level){
     DBConnector connector(params.db_allow_exceptions, db_log_level);
     DBHandler db;
     if (params.db_name.starts_with("tmp."s)) {
@@ -46,7 +46,7 @@ optional<DBHandler> DataBaseConnection(const SetDbConnectionParams& params, cons
 }
 
 vector<Person> LoadPersons(const SetDbConnectionParams& connection_db_params,
-                           const DBLogLevel db_log_level, const SetPersonsParams& person_params, string_view name_filter) {
+                           const DBLogLevel& db_log_level, const SetPersonsParams& person_params, string_view name_filter) {
     
     optional<DBHandler> db = DataBaseConnection( 
                        SetDbConnectionParams()
